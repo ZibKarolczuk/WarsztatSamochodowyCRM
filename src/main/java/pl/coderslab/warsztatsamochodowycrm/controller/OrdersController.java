@@ -10,19 +10,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "IndexController", urlPatterns = {"/"})
-public class IndexController extends HttpServlet {
+@WebServlet(name = "OrdersController", urlPatterns = {"/orders"})
+public class OrdersController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
             request.setAttribute("orders", OrderDao.loadAll());
             getServletContext()
-                    .getRequestDispatcher("/WEB-INF/views/index.jsp")
+                    .getRequestDispatcher("/WEB-INF/views/orders.jsp")
                     .forward(request, response);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+
+
     }
+
 }
